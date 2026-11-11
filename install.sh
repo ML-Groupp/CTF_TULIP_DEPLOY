@@ -79,6 +79,7 @@ if [ "$CONFIG_ONLY" -eq 0 ]; then
     sh /tmp/get-docker.sh
   fi
   systemctl enable --now docker >/dev/null 2>&1 || true
+  docker compose version >/dev/null 2>&1 || apt-get install -y -qq docker-compose-plugin >/dev/null
 
   swap_mb="$(free -m | awk '/^Swap:/{print $2}')"
   if [ "${swap_mb:-0}" -lt 2048 ] && [ ! -f /swapfile ]; then
