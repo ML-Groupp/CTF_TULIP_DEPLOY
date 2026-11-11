@@ -2,7 +2,7 @@
 set -euo pipefail
 
 TULIP_DIR="${TULIP_DIR:-/opt/tulip}"
-INSTALLER="${TULIP_INSTALLER:-/root/tulip-install.sh}"
+INSTALLER="${TULIP_INSTALLER:-/root/tulip-deploy/install.sh}"
 cd "$TULIP_DIR"
 
 case "${1:-status}" in

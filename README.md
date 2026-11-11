@@ -14,9 +14,8 @@
 ## Установка
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/godofhustle/tulip-deploy/main/install.sh -o /root/tulip-install.sh
-chmod +x /root/tulip-install.sh
-bash /root/tulip-install.sh
+git clone https://github.com/godofhustle/tulip-deploy.git /root/tulip-deploy
+bash /root/tulip-deploy/install.sh
 ```
 
 Скрипт спросит три вещи: время старта CTF (UTC), список сервисов и пароль для веба (можно оставить пустым — сгенерирует сам).
@@ -28,7 +27,7 @@ TICK_START="2026-11-15T09:00:00Z" \
 FLAG_REGEX="[A-Z0-9]{31}=" \
 SERVICES="10.10.3.1:8080 service1, 10.10.3.1:5555 service2" \
 WEBPASS="MyTeamPass123" \
-bash /root/tulip-install.sh
+bash /root/tulip-deploy/install.sh
 ```
 
 ### Флаги
@@ -140,7 +139,7 @@ ssh -i ~/.ssh/tulip_key -L 3000:127.0.0.1:3000 root@SERVER_IP
 /root/tulip-deploy/tulip.sh update
 
 # откатиться на конкретный коммит
-TULIP_REF=<sha> bash /root/tulip-install.sh
+TULIP_REF=<sha> bash /root/tulip-deploy/install.sh
 
 # полный сброс базы (pcap остаются)
 /root/tulip-deploy/tulip.sh reset
@@ -159,7 +158,7 @@ rm -rf /opt/tulip /opt/caddy
 - `api` пишет `connection refused` первые 20 секунд — это нормально, ждёт Postgres.
 - 502 от Caddy — проверь `docker compose ps`, обычно лежит `api` или `timescale`.
 - Браузер ругается на сертификат — убедись, что заходишь по имени `*.sslip.io`, а не по IP (для IP браузер не шлёт SNI).
-- Свой домен: `DOMAIN=tulip.example.com bash /root/tulip-install.sh`, A-запись должна указывать на сервер.
+- Свой домен: `DOMAIN=tulip.example.com bash /root/tulip-deploy/install.sh`, A-запись должна указывать на сервер.
 
 ## Структура репозитория
 
