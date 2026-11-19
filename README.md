@@ -113,7 +113,10 @@ Assembler сам подхватывает новые файлы, перезап�
 /root/tulip-deploy/tulip.sh services        # редактор списка + пересборка api
 /root/tulip-deploy/tulip.sh reset           # снести базу и поднять заново
 /root/tulip-deploy/tulip.sh update          # обновить Tulip до origin/master
+bash /root/tulip-deploy/restart.sh          # пересобрать образы и пересоздать контейнеры
 ```
+
+`restart.sh` сохраняет базу и PCAP-файлы. Он также исправляет `shm_size: 128g` в compose на `128m` перед запуском: это ограничивает shared memory TimescaleDB и помогает избежать чрезмерного расхода памяти. Для полного сброса базы используй `tulip.sh reset`.
 
 Если положить скрипт в `/usr/local/bin/tulip`, можно писать `tulip status` и т.д.
 
